@@ -17,7 +17,27 @@
 			<groupId>org.jboss.spec.javax.ejb</groupId>
 			<artifactId>jboss-ejb-api_3.1_spec</artifactId>
 			<version>1.0.2.Final</version>
+			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.6.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.enterprise</groupId>
+			<artifactId>cdi-api</artifactId>
+			<version>1.1.EDR1.2</version>
+		</dependency>
+		<!--
+		<dependency>
+			<groupId>org.jboss.logging</groupId>
+			<artifactId>jboss-logging</artifactId>
+			<version>3.1.1.GA</version>
+			<scope>provided</scope>
+		</dependency>
+		-->
 	</dependencies>
 
 	<build>
