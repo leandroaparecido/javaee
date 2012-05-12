@@ -13,7 +13,6 @@
 			<groupId>teste</groupId>
 			<artifactId>servico-voucher</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.jboss.spec.javax.ejb</groupId>
@@ -44,6 +43,35 @@
 					<source>1.6</source>
 					<target>1.6</target>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>1.6</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<artifactSet>
+								<includes>
+									<include>teste:servico-voucher</include>
+								</includes>
+							</artifactSet>
+							<filters>
+								<filter>
+									<artifact>teste:servico-voucher</artifact>
+									<includes>
+										<include>voucher/VoucherServiceRemote.class</include>
+									</includes>
+								</filter>
+							</filters>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

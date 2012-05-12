@@ -10,7 +10,6 @@ import javax.management.*;
 
 @Singleton
 @Startup
-@Local(VoucherManagementListener.class)
 public class VoucherManagement implements VoucherManagementMXBean, VoucherManagementListener {
 
 	private AtomicInteger invalidVouchersCount = new AtomicInteger();

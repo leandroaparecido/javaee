@@ -58,4 +58,106 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>setup-dev</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.google.code.maven-config-processor-plugin</groupId>
+						<artifactId>maven-config-processor-plugin</artifactId>
+						<version>2.2</version>
+						<configuration>
+							<useOutputDirectory>false</useOutputDirectory>
+							<lineWidth>150</lineWidth>
+							<transformations>
+								<transformation>
+									<input>${jboss.home}/standalone/configuration/standalone.xml</input>
+									<output>${jboss.home}/standalone/configuration/standalone.xml</output>
+									<rules>
+										<add>
+											<after>//l:logger[@category='jacorb.config']</after>
+											<value>
+												<![CDATA[
+									            <logger category="voucher" use-parent-handlers="true">
+									                <level name="DEBUG"/>
+									                <handlers>
+									                    <handler name="teste"/>
+									                </handlers>
+									            </logger>
+									            ]]>
+											</value>
+										</add>
+										<add>
+											<after>//l:periodic-rotating-file-handler[@name='FILE']</after>
+											<value>
+												<![CDATA[
+									            <size-rotating-file-handler name="teste" autoflush="true">
+									                <level name="DEBUG"/>
+									                <file relative-to="jboss.server.log.dir" path="teste.log"/>
+									                <append value="true"/>
+									            </size-rotating-file-handler>
+									            ]]>
+											</value>
+										</add>
+										<add>
+											<after>//d:datasource[@pool-name='ExampleDS']</after>
+											<value>
+												<![CDATA[
+								                <datasource enabled="true" jndi-name="java:jboss/datasources/Tracking" pool-name="Tracking" use-java-context="true">
+								                    <connection-url>jdbc:mysql://localhost/Tracking</connection-url>
+								                    <driver>mysql-connector-java-5.1.20.jar</driver>
+								                    <security>
+								                        <user-name>root</user-name>
+								                        <password>root</password>
+								                    </security>
+								                </datasource>
+												]]>
+											</value>
+										</add>
+									</rules>
+								</transformation>
+							</transformations>
+							<namespaceContexts>
+								<l>urn:jboss:domain:logging:1.1</l>
+								<d>urn:jboss:domain:datasources:1.0</d>
+							</namespaceContexts>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>validate</phase>
+								<goals>
+									<goal>process</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-dependency-plugin</artifactId>
+						<version>2.4</version>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>mysql</groupId>
+									<artifactId>mysql-connector-java</artifactId>
+									<version>5.1.20</version>
+								</artifactItem>
+							</artifactItems>
+							<outputDirectory>${jboss.home}/standalone/deployments</outputDirectory>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>validate</phase>
+								<goals>
+									<goal>copy</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

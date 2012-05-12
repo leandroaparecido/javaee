@@ -7,7 +7,6 @@ import javax.inject.*;
 import org.slf4j.*;
 
 @Stateless
-@Remote(VoucherServiceRemote.class)
 public class VoucherService implements VoucherServiceRemote {
 
 	private static final Logger logger = LoggerFactory.getLogger(VoucherService.class);
@@ -16,7 +15,7 @@ public class VoucherService implements VoucherServiceRemote {
 	private Event<Integer> invalidVouchersEvent;
 
 	public String sayHello(String to) {
-		logger.debug("Saying hello to [{}]", to);
+		logger.debug("Saying hello to [{}]!", to);
 		return "Hello " + to; 
 	}
 

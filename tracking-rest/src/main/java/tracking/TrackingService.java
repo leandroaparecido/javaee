@@ -1,16 +1,15 @@
 package tracking;
 
-import javax.ejb.*;
 import javax.inject.*;
 import javax.ws.rs.*;
 
-import voucher.VoucherServiceRemote;
+import voucher.*;
 
 @Named
 @Path("/test")
 public class TrackingService {
 
-	@EJB(lookup = "java:global/servico-voucher-0.0.1-SNAPSHOT/VoucherService!voucher.VoucherServiceRemote")
+	@Inject
 	private VoucherServiceRemote voucherService;
 
 	@GET
