@@ -1,17 +1,14 @@
 package test;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.Schedule;
 import javax.ejb.Stateless;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
-import org.springframework.data.repository.core.support.RepositoryFactorySupport;
 
 import test.repository.TestRepository;
 
@@ -23,20 +20,22 @@ public class HelloServiceImpl implements HelloService {
 	@Inject
 	Event<Integer> updateEvent;
 
-	@PersistenceContext
-	EntityManager entityManager;
+//	@PersistenceContext
+//	EntityManager entityManager;
 
+	@Inject
 	TestRepository repository;
-
+/*
 	@PostConstruct
 	public void init() {
 		RepositoryFactorySupport support = new JpaRepositoryFactory(entityManager);
 		repository = support.getRepository(TestRepository.class);
 	}
-
+*/
+	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public String sayHello(String to) {
 		logger.debug("Saying hello to [{}]!", to);
-		repository.save(new Person(to));
+		repository.saveAndFlush(new Person(to));
 		return "Hello " + to;
 	}
 

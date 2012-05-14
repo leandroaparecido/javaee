@@ -2,15 +2,15 @@ package test.repository;
 
 import static org.junit.Assert.*;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 
-import org.junit.*;
-import org.springframework.data.domain.*;
-import org.springframework.data.jpa.repository.support.*;
-import org.springframework.data.repository.core.support.*;
+import org.junit.Before;
+import org.junit.Test;
 
 import test.Person;
-import test.repository.TestRepository;
 
 public class Test1 {
 
@@ -21,8 +21,6 @@ public class Test1 {
 	public void init() {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("test");
 		em = entityManagerFactory.createEntityManager();
-		RepositoryFactorySupport support = new JpaRepositoryFactory(em);
-		repository = support.getRepository(TestRepository.class);
 	}
 
 	@Test
@@ -30,8 +28,8 @@ public class Test1 {
 		EntityTransaction transaction = em.getTransaction();
 		transaction.begin();
 		repository.save(new Person("person1"));
-		assertEquals(1, repository.count());
-		System.out.println(repository.findWithCustomQuery("person1", new Sort(Sort.Direction.ASC, "name")));
+		assertEquals(1, repository.count().longValue());
+		System.out.println(repository.findWithCustomQuery("person1"));
 		transaction.commit();
 	}
 }
