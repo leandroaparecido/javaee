@@ -1,8 +1,8 @@
-package tracking;
+package test;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
 @ApplicationPath("/app")
-public class TrackingApplication extends Application {
+public class TestApplication extends Application {
 }

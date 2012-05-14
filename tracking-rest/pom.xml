@@ -15,21 +15,11 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>org.jboss.spec.javax.ejb</groupId>
-			<artifactId>jboss-ejb-api_3.1_spec</artifactId>
-			<version>1.0.2.Final</version>
+			<groupId>org.jboss.spec</groupId>
+			<artifactId>jboss-javaee-6.0</artifactId>
+			<version>1.0.0.Final</version>
+			<type>pom</type>
 			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>jsr311-api</artifactId>
-			<version>1.1.1</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.enterprise</groupId>
-			<artifactId>cdi-api</artifactId>
-			<version>1.1.EDR1.2</version>
 		</dependency>
 	</dependencies>
 
@@ -44,7 +34,7 @@
 					<target>1.6</target>
 				</configuration>
 			</plugin>
-
+<!--
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
@@ -65,14 +55,21 @@
 								<filter>
 									<artifact>teste:servico-voucher</artifact>
 									<includes>
-										<include>voucher/VoucherServiceRemote.class</include>
+										<include>**/VoucherServiceRemote.class</include>
 									</includes>
 								</filter>
 							</filters>
+							<relocations>
+								<relocation>
+									<pattern>WEB-INF/classes/voucher</pattern>
+									<shadedPattern>voucher</shadedPattern>
+								</relocation>
+							</relocations>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
+-->
 		</plugins>
 	</build>
 </project>

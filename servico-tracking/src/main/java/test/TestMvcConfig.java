@@ -1,4 +1,4 @@
-package tracking;
+package test;
 
 import org.cdisource.springintegration.*;
 import org.springframework.context.annotation.*;
@@ -7,7 +7,7 @@ import org.springframework.web.servlet.view.*;
 
 @Configuration
 @EnableWebMvc
-public class TrackingMvcConfig {
+public class TestMvcConfig {
 
 	@Bean
 	public static CdiBeanFactoryPostProcessor cdiBeanFactoryPostProcessor() {

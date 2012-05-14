@@ -1,4 +1,4 @@
-package tracking;
+package test;
 
 import javax.servlet.*;
 
@@ -8,12 +8,12 @@ import org.springframework.web.context.*;
 import org.springframework.web.context.support.*;
 import org.springframework.web.servlet.*;
 
-public class TrackingInitializer implements WebApplicationInitializer {
+public class TestApplicationInitializer implements WebApplicationInitializer {
 
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-		ctx.register(TrackingMvcConfig.class);
+		ctx.register(TestMvcConfig.class);
 
 		ServletRegistration.Dynamic servlet = servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));
 		servlet.setLoadOnStartup(1);

@@ -1,20 +1,14 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>teste</groupId>
-	<artifactId>servico-tracking</artifactId>
+	<groupId>test</groupId>
+	<artifactId>javaee</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>servico-tracking</name>
-
 	<dependencies>
-		<dependency>
-			<groupId>teste</groupId>
-			<artifactId>tracking-rest</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 		<dependency>
 			<groupId>org.jboss.spec</groupId>
 			<artifactId>jboss-javaee-6.0</artifactId>
@@ -43,6 +37,42 @@
 			<artifactId>springbridge</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<!-- version>1.0.3.RELEASE</version -->
+			<version>1.1.0.RC1</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.data</groupId>
+					<artifactId>spring-data-commons-core</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-commons-core</artifactId>
+			<version>1.3.0.RC1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.3.0.Final</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.3.166</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -54,14 +84,6 @@
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-ejb-plugin</artifactId>
-				<version>2.3</version>
-				<configuration>
-					<ejbVersion>3.1</ejbVersion>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -96,10 +118,10 @@
 											<after>//l:logger[@category='jacorb.config']</after>
 											<value>
 												<![CDATA[
-									            <logger category="voucher" use-parent-handlers="true">
+									            <logger category="test" use-parent-handlers="true">
 									                <level name="DEBUG"/>
 									                <handlers>
-									                    <handler name="teste"/>
+									                    <handler name="test"/>
 									                </handlers>
 									            </logger>
 									            ]]>
@@ -109,9 +131,9 @@
 											<after>//l:periodic-rotating-file-handler[@name='FILE']</after>
 											<value>
 												<![CDATA[
-									            <size-rotating-file-handler name="teste" autoflush="true">
+									            <size-rotating-file-handler name="test" autoflush="true">
 									                <level name="DEBUG"/>
-									                <file relative-to="jboss.server.log.dir" path="teste.log"/>
+									                <file relative-to="jboss.server.log.dir" path="test.log"/>
 									                <append value="true"/>
 									            </size-rotating-file-handler>
 									            ]]>
@@ -121,8 +143,8 @@
 											<after>//d:datasource[@pool-name='ExampleDS']</after>
 											<value>
 												<![CDATA[
-								                <datasource enabled="true" jndi-name="java:jboss/datasources/Tracking" pool-name="Tracking" use-java-context="true">
-								                    <connection-url>jdbc:mysql://localhost/Tracking</connection-url>
+								                <datasource enabled="true" jndi-name="java:jboss/datasources/test" pool-name="Tracking" use-java-context="true">
+								                    <connection-url>jdbc:mysql://localhost/test</connection-url>
 								                    <driver>mysql-connector-java-5.1.20.jar</driver>
 								                    <security>
 								                        <user-name>root</user-name>

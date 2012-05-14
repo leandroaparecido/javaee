@@ -20,17 +20,18 @@ public class VoucherService implements VoucherServiceRemote {
 	@Inject
 	Event<Integer> invalidVouchersEvent;
 
-	@PersistenceContext
-	EntityManager entityManager;
+//	@PersistenceContext
+//	EntityManager entityManager;
 
+	@Inject
 	private VoucherRepository repository;
 
-	@PostConstruct
+/*	@PostConstruct
 	public void init() {
 		RepositoryFactorySupport support = new JpaRepositoryFactory(entityManager);
 		repository = support.getRepository(VoucherRepository.class);
 	}
-
+*/
 	public String sayHello(String to) {
 		logger.debug("Saying hello to [{}]!", to);
 		repository.save(new Person(to));
