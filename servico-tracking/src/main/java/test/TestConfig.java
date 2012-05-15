@@ -8,20 +8,12 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-public class TestMvcConfig {
+public class TestConfig {
 
 	@Bean
 	public static CdiBeanFactoryPostProcessor cdiBeanFactoryPostProcessor() {
 		return new CdiBeanFactoryPostProcessor();
 	}
-
-	/*
-	@Bean
-	public PlatformTransactionManager transactionManager() {
-		JtaTransactionManager manager = new JtaTransactionManager();
-		return manager;
-	}
-	*/
 
 	@Bean
 	public InternalResourceViewResolver configureInternalResourceViewResolver() {

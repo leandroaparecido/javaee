@@ -2,8 +2,6 @@ package test;
 
 import javax.ejb.Schedule;
 import javax.ejb.Stateless;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
@@ -20,19 +18,9 @@ public class HelloServiceImpl implements HelloService {
 	@Inject
 	Event<Integer> updateEvent;
 
-//	@PersistenceContext
-//	EntityManager entityManager;
-
 	@Inject
 	TestRepository repository;
-/*
-	@PostConstruct
-	public void init() {
-		RepositoryFactorySupport support = new JpaRepositoryFactory(entityManager);
-		repository = support.getRepository(TestRepository.class);
-	}
-*/
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
+
 	public String sayHello(String to) {
 		logger.debug("Saying hello to [{}]!", to);
 		repository.saveAndFlush(new Person(to));
