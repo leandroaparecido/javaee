@@ -14,6 +14,9 @@ public interface TestRepository extends EntityDao<Person, Long> {
 
 	List<Person> findByNameLike(String name);
 
+	@Query(named = "byNameLike")
+	List<Person> findByNameLikeNamed(String name);
+
 	@Query("SELECT p FROM Person p WHERE p.name = :name")
 	List<Person> findWithCustomQuery(@QueryParam("name") String name);
 

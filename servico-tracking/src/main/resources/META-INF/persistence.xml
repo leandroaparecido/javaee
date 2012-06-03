@@ -3,9 +3,11 @@
 	<persistence-unit name="test">
 		<jta-data-source>java:jboss/datasources/test</jta-data-source>
 		<class>test.Person</class>
+		<shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="create" />
-			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.cache.use_second_level_cache" value="true"/>
+			<property name="hibernate.cache.use_query_cache" value="true" />
+			<property name="hibernate.cache.region_prefix" value="javaee" />
 		</properties>
 	</persistence-unit>
 </persistence>
