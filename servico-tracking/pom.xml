@@ -8,7 +8,7 @@
 	<packaging>war</packaging>
 
 	<properties>
-		<javasimon.version>3.2.2-SNAPSHOT</javasimon.version>
+		<javasimon.version>3.2.1</javasimon.version>
 	</properties>
 
 	<dependencies>
